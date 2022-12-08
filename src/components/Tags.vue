@@ -1,5 +1,5 @@
 <template>
-    <div class="tag-container">
+    <div class="tag-container" @click="focused">
      <Tag 
      v-for="(tag,index) in tags"
      :tag="tag"
@@ -71,6 +71,9 @@ export default {
     },
     selectedRemoveTag(index){
       this.tags.splice(index,1);
+    },
+    focused(){
+      document.querySelector('input[type="text"]').focus();
     }
   },
   watch:{
@@ -91,7 +94,7 @@ export default {
 input {
   outline: none;
   height: 30px;
-
+  border:none;
 }
 
 .error {
