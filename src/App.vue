@@ -1,29 +1,33 @@
 <template>
- <div class="containter">
-    <app-tags v-model="tags"  @changeTagsEvent="(tags=$event)"></app-tags>
+  <div class="containter">
+    <app-tags v-model="tags" @changeTagsEvent="tags = $event" color="info"></app-tags>
     <div class="tags">
-    {{tags}}
+      {{ tags }}
+    </div>
   </div>
- </div>
 </template>
 <script>
 import Tags from "./components/Tags"
 export default {
-  components:{
- appTags: Tags
+  components: {
+    appTags: Tags
   },
-  data(){
-    return{
-      tags:"aaa,ddd",
+  data() {
+    return {
+      tags: "masa,mobilya,kitaplık",
     }
   },
-  methods:{
- 
+  methods: {
+
   }
 }
 </script>
 <style>
 body {
   font-family: sans-serif;
+}
+
+.tags {
+  word-break: break-word;
 }
 </style>

@@ -4,6 +4,7 @@
      v-for="(tag,index) in tags"
      :tag="tag"
      :index="index"
+     :tagColor="color"
      @selectedRemoveTagEvent="selectedRemoveTag($event)"
       />
     <input 
@@ -11,7 +12,7 @@
     @keydown.enter="addTag"
     @keydown.backspace="removeTag"
     >
-    <div class="error" v-show="error">Bu etiket daha önceden eklenmiştir!</div>
+    <div class="error" v-show="error">({{errorTag}}) daha önceden eklenmiştir!</div>
 
   </div>
 </template>
@@ -25,12 +26,18 @@ export default {
   props: {
     value: {
       required: false,
+    },
+    color:{
+      type: String,
+      required: false,
+      default: "primary"
     }
   },
   data() {
     return {
       tags: [],
       error: false,
+      errorTag: '',
     }
   },
   created(){
@@ -57,6 +64,7 @@ export default {
           this.tags.push(text);
         } else {
           this.error = true;
+          this.errorTag= text;
           setTimeout(() => {
             this.error = false;
           }, 2000)
@@ -87,14 +95,16 @@ export default {
 <style scoped>
 .tag-container {
   border: 1px solid #ccc;
-  padding: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
-
 
 input {
   outline: none;
   height: 30px;
   border:none;
+  margin-top:10px;
+  margin-bottom:10px;
 }
 
 .error {
